@@ -1,28 +1,35 @@
 // Requires
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
-//Variable initiation
+// Variable initiation
 var app = express();
 
+// BodyParse
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Import Routes
+var appRoutes = require('./routes/app.route');
+var userRoutes = require('./routes/user.route');
+var loginRoutes = require('./routes/login.route');
+
+// Routes
+app.use('/user', userRoutes);
+app.use('/login', loginRoutes);
+app.use('/', appRoutes);
+
 // Database connection
-mongoose.connection.openUri('mongodb://localhost:27017/hospitaldb', (error, response) => {
+mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', (error, response) => {
   if (error) {
     throw error;
   }
   console.log('Data Base: \x1b[32m%s\x1b[0m ', 'online');
 });
 
-//Routes
-app.get('/', (request, response, next) => {
-  // See http code response https://www.tutorialspoint.com/http/http_status_codes.htm#:~:text=The%20Status%2DCode%20element%20in,S.N.
-  response.status(200).json({
-    isOk: true,
-    message: 'request made correctly!',
-  });
-});
-
-//listen request
+// listen request
 app.listen(3000, () => {
   console.log('Express server 3000 port: \x1b[32m%s\x1b[0m ', 'online');
 });
