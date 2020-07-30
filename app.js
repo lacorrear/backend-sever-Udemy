@@ -12,13 +12,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Import Routes
-var appRoutes = require('./routes/app.route');
 var userRoutes = require('./routes/user.route');
 var loginRoutes = require('./routes/login.route');
+var hospitalRoutes = require('./routes/hospital.route');
+var doctorRoutes = require('./routes/doctor.route');
+var searchRoutes = require('./routes/search.route');
+var uploadRoutes = require('./routes/upload.route');
+var imageRoutes = require('./routes/image.route');
+var appRoutes = require('./routes/app.route');
+
+// Server index config --see video 11.15 File system
+//
+// Display image on the browser
+// var serveIndex = require('serve-index');
+// app.use(express.static(__dirname + '/'));
+// app.use('/uploads', serveIndex(__dirname + '/uploads'));
 
 // Routes
 app.use('/user', userRoutes);
 app.use('/login', loginRoutes);
+app.use('/hospital', hospitalRoutes);
+app.use('/doctor', doctorRoutes);
+app.use('/search', searchRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/image', imageRoutes);
 app.use('/', appRoutes);
 
 // Database connection
