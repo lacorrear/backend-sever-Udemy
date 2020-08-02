@@ -1,0 +1,5 @@
+before run instal node modules
+
+1. npm install
+2. ng serve -o
+3. Enjoy it 
